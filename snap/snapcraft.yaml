@@ -1,18 +1,14 @@
-name: edgex-device-camera
+name: edgex-cli
 base: core18
 version: "0.0.0"
 version-script: |
   VERSION=$(shell cat ./VERSION 2>/dev/null || echo 0.0.0)
   echo $VERSION-$(date +%Y%m%d)+$(git rev-parse --short HEAD)
 license: Apache-2.0
-summary: Control/communicate with ONVIF-compliant cameras using Camera Device Service
-title: EdgeX Camera Device Service
+summary: EdgeX CLI
+title: EdgeX CLI
 description: |
-  The EdgeX Camera Device Service is developed to control/communicate ONVIF-compliant
-  cameras accessible via http in an EdgeX deployment.
-  Initially the daemon in the snap is disabled - a device profile must be
-  provisioned externally with core-metadata or provided to device-camera-go inside
-  "$SNAP_DATA/config/device-camera-go/res" before starting.
+  EdgeX CLI
 
 # TODO: add armhf when the project supports this
 architectures:
@@ -26,14 +22,14 @@ confinement: strict
 epoch: 3
 
 apps:
-  device-camera-go:
+  device-cli:
     adapter: none
-    command: bin/device-camera-go $CONFIG_PRO_ARG $CONF_ARG $REGISTRY_ARG
+    command: bin/device-cli $CONFIG_PRO_ARG $CONF_ARG $REGISTRY_ARG
     environment:
       CONFIG_PRO_ARG: "--cp=consul://localhost:8500"
-      CONF_ARG: "--confdir=$SNAP_DATA/config/device-camera-go/res"
+      CONF_ARG: "--confdir=$SNAP_DATA/config/device-cli/res"
       REGISTRY_ARG: "--registry"
-      DEVICE_PROFILESDIR: "$SNAP_DATA/config/device-camera-go/res"
+      DEVICE_PROFILESDIR: "$SNAP_DATA/config/device-cli/res"
     daemon: simple
     plugs: [network, network-bind]
 
