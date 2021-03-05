@@ -44,7 +44,7 @@ func NewCommand() *cobra.Command {
 		Short: "Checks the current status of each microservice",
 		Long: fmt.Sprintf(`Status
 		
-This command pings each edgex microservice defined in CLI '%s' file placed within '$HOME/.edgex-cli' directory and prints their status.
+This command pings each edgex microservice defined in the client's '%s' file (found in '$HOME/snap/edgex-cli/current/.edgex-cli') and displays its status.
 `, config.ConfigFileName),
 		Run: func(cmd *cobra.Command, args []string) {
 			var clientStatuses []clientStatus
