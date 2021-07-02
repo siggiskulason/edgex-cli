@@ -22,7 +22,8 @@ ARTIFACT_ROOT?=bin
 
 build:
 	@echo "GOPATH=$(GOPATH)"
-	$(GO) build -o $(BINARY) $(GOFLAGS)
+	go mod tidy
+	$(GO) build -o $(BINARY) $(GOFLAGS) ./cmd/edgex-cli
 
 # initial impl. Feel free to override. Please keep ARTIFACT_ROOT coming from env though. CI/CD pipeline relies on this
 build-all:

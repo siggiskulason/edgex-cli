@@ -12,10 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package interval
 
-import "github.com/edgexfoundry/edgex-cli/cmd"
+import (
+	"github.com/edgexfoundry/edgex-cli/cmd/interval/add"
+	"github.com/edgexfoundry/edgex-cli/cmd/interval/list"
+	"github.com/edgexfoundry/edgex-cli/cmd/interval/rm"
+	"github.com/edgexfoundry/edgex-cli/cmd/interval/update"
 
-func main() {
-	cmd.Execute()
+	"github.com/spf13/cobra"
+)
+
+func NewCommand() *cobra.Command {
+	var cmd = &cobra.Command{
+		Use:   "interval",
+		Short: "Interval command",
+		Long:  `Actions related to intervals (scheduler).`,
+	}
+	cmd.AddCommand(add.NewCommand())
+	cmd.AddCommand(rm.NewCommand())
+	cmd.AddCommand(update.NewCommand())
+	cmd.AddCommand(list.NewCommand())
+	return cmd
 }
